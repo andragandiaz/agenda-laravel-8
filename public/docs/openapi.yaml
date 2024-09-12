@@ -1,0 +1,1486 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/agendas:
+    post:
+      summary: 'Add a new agenda'
+      operationId: addANewAgenda
+      description: 'This endpoint allows a user to add a new agenda item to the system.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Agenda berhasil ditambahkan'
+                  data:
+                    id: 1
+                    tanggal: '2024-08-27'
+                    waktu: '09:00'
+                    kegiatan: 'Meeting with client'
+                    tipe_acara: Offline
+                    tempat: Jakarta
+                    delegasi: Andra
+                    drescode: 'Business Casual'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Agenda berhasil ditambahkan'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      tanggal:
+                        type: string
+                        example: '2024-08-27'
+                      waktu:
+                        type: string
+                        example: '09:00'
+                      kegiatan:
+                        type: string
+                        example: 'Meeting with client'
+                      tipe_acara:
+                        type: string
+                        example: Offline
+                      tempat:
+                        type: string
+                        example: Jakarta
+                      delegasi:
+                        type: string
+                        example: Andra
+                      drescode:
+                        type: string
+                        example: 'Business Casual'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Ada kesalahan dalam validasi input'
+                  data:
+                    tanggal:
+                      - 'The tanggal field is required.'
+                    waktu:
+                      - 'The waktu field is required.'
+                    kegiatan:
+                      - 'The kegiatan field is required.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Ada kesalahan dalam validasi input'
+                  data:
+                    type: object
+                    properties:
+                      tanggal:
+                        type: array
+                        example:
+                          - 'The tanggal field is required.'
+                        items:
+                          type: string
+                      waktu:
+                        type: array
+                        example:
+                          - 'The waktu field is required.'
+                        items:
+                          type: string
+                      kegiatan:
+                        type: array
+                        example:
+                          - 'The kegiatan field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Agenda Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tanggal:
+                  type: date
+                  description: 'The date of the agenda.'
+                  example: '2024-08-27'
+                waktu:
+                  type: string
+                  description: 'The time of the agenda.'
+                  example: '09:00'
+                kegiatan:
+                  type: string
+                  description: 'The activity of the agenda.'
+                  example: 'Meeting with client'
+                tipe_acara:
+                  type: string
+                  description: 'The type of event.'
+                  example: Offline
+                tempat:
+                  type: string
+                  description: 'The location of the agenda.'
+                  example: Jakarta
+                delegasi:
+                  type: string
+                  description: 'The delegation for the agenda.'
+                  example: Andra
+                drescode:
+                  type: string
+                  description: 'The dress code for the agenda.'
+                  example: 'Business Casual'
+              required:
+                - tanggal
+                - waktu
+                - kegiatan
+                - tipe_acara
+                - tempat
+                - delegasi
+                - drescode
+      security: []
+    get:
+      summary: 'List all agendas'
+      operationId: listAllAgendas
+      description: 'This endpoint retrieves a list of all agenda items in the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Daftar agenda berhasil diambil'
+                  data:
+                    -
+                      id: 1
+                      tanggal: '2024-08-27'
+                      waktu: '09:00'
+                      kegiatan: 'Meeting with client'
+                      tipe_acara: Offline
+                      tempat: Jakarta
+                      delegasi: Andra
+                      drescode: 'Business Casual'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Daftar agenda berhasil diambil'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        tanggal: '2024-08-27'
+                        waktu: '09:00'
+                        kegiatan: 'Meeting with client'
+                        tipe_acara: Offline
+                        tempat: Jakarta
+                        delegasi: Andra
+                        drescode: 'Business Casual'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        tanggal:
+                          type: string
+                          example: '2024-08-27'
+                        waktu:
+                          type: string
+                          example: '09:00'
+                        kegiatan:
+                          type: string
+                          example: 'Meeting with client'
+                        tipe_acara:
+                          type: string
+                          example: Offline
+                        tempat:
+                          type: string
+                          example: Jakarta
+                        delegasi:
+                          type: string
+                          example: Andra
+                        drescode:
+                          type: string
+                          example: 'Business Casual'
+      tags:
+        - 'Agenda Management'
+      security: []
+  '/api/agendas/{id}':
+    get:
+      summary: 'Get details of a specific agenda'
+      operationId: getDetailsOfASpecificAgenda
+      description: 'This endpoint retrieves details of a specific agenda item by its ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Detail agenda berhasil diambil'
+                  data:
+                    id: 1
+                    tanggal: '2024-08-27'
+                    waktu: '09:00'
+                    kegiatan: 'Meeting with client'
+                    tipe_acara: Offline
+                    tempat: Jakarta
+                    delegasi: Andra
+                    drescode: 'Business Casual'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Detail agenda berhasil diambil'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      tanggal:
+                        type: string
+                        example: '2024-08-27'
+                      waktu:
+                        type: string
+                        example: '09:00'
+                      kegiatan:
+                        type: string
+                        example: 'Meeting with client'
+                      tipe_acara:
+                        type: string
+                        example: Offline
+                      tempat:
+                        type: string
+                        example: Jakarta
+                      delegasi:
+                        type: string
+                        example: Andra
+                      drescode:
+                        type: string
+                        example: 'Business Casual'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Agenda tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Agenda tidak ditemukan'
+      tags:
+        - 'Agenda Management'
+      security: []
+    put:
+      summary: 'Update a specific agenda'
+      operationId: updateASpecificAgenda
+      description: 'This endpoint allows a user to update the details of a specific agenda item.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Agenda berhasil diperbarui'
+                  data:
+                    id: 1
+                    tanggal: '2024-08-27'
+                    waktu: '09:00'
+                    kegiatan: 'Meeting with client'
+                    tipe_acara: Offline
+                    tempat: Jakarta
+                    delegasi: Andra
+                    drescode: 'Business Casual'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Agenda berhasil diperbarui'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      tanggal:
+                        type: string
+                        example: '2024-08-27'
+                      waktu:
+                        type: string
+                        example: '09:00'
+                      kegiatan:
+                        type: string
+                        example: 'Meeting with client'
+                      tipe_acara:
+                        type: string
+                        example: Offline
+                      tempat:
+                        type: string
+                        example: Jakarta
+                      delegasi:
+                        type: string
+                        example: Andra
+                      drescode:
+                        type: string
+                        example: 'Business Casual'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Agenda tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Agenda tidak ditemukan'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Ada kesalahan dalam validasi input'
+                  data:
+                    tanggal:
+                      - 'The tanggal field is required.'
+                    waktu:
+                      - 'The waktu field is required.'
+                    kegiatan:
+                      - 'The kegiatan field is required.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Ada kesalahan dalam validasi input'
+                  data:
+                    type: object
+                    properties:
+                      tanggal:
+                        type: array
+                        example:
+                          - 'The tanggal field is required.'
+                        items:
+                          type: string
+                      waktu:
+                        type: array
+                        example:
+                          - 'The waktu field is required.'
+                        items:
+                          type: string
+                      kegiatan:
+                        type: array
+                        example:
+                          - 'The kegiatan field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Agenda Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tanggal:
+                  type: date
+                  description: 'The date of the agenda.'
+                  example: '2024-08-27'
+                waktu:
+                  type: string
+                  description: 'The time of the agenda.'
+                  example: '09:00'
+                kegiatan:
+                  type: string
+                  description: 'The activity of the agenda.'
+                  example: 'Meeting with client'
+                tipe_acara:
+                  type: string
+                  description: 'The type of event.'
+                  example: Offline
+                tempat:
+                  type: string
+                  description: 'The location of the agenda.'
+                  example: Jakarta
+                delegasi:
+                  type: string
+                  description: 'The delegation for the agenda.'
+                  example: Andra
+                drescode:
+                  type: string
+                  description: 'The dress code for the agenda.'
+                  example: 'Business Casual'
+              required:
+                - tanggal
+                - waktu
+                - kegiatan
+                - tipe_acara
+                - tempat
+                - delegasi
+                - drescode
+      security: []
+    delete:
+      summary: 'Delete a specific agenda'
+      operationId: deleteASpecificAgenda
+      description: 'This endpoint allows a user to delete a specific agenda item from the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Agenda berhasil dihapus'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Agenda berhasil dihapus'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Agenda tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Agenda tidak ditemukan'
+      tags:
+        - 'Agenda Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the agenda item.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/register:
+    post:
+      summary: 'Register a new user'
+      operationId: registerANewUser
+      description: 'This endpoint allows a user to register a new account in the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Sukses register'
+                  data:
+                    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                    name: Andra
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Sukses register'
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                      name:
+                        type: string
+                        example: Andra
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Ada kesalahan'
+                  data:
+                    email:
+                      - 'The email has already been taken.'
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Ada kesalahan'
+                  data:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: Andra
+                email:
+                  type: string
+                  description: 'The email address of the user.'
+                  example: andra@yahoo.com
+                password:
+                  type: string
+                  description: 'The password for the account.'
+                  example: rahasia123
+                confirm_password:
+                  type: string
+                  description: 'Password confirmation, must match the password.'
+                  example: rahasia123
+              required:
+                - name
+                - email
+                - password
+                - confirm_password
+      security: []
+  /api/login:
+    post:
+      summary: 'User login'
+      operationId: userLogin
+      description: 'This endpoint allows a user to login with an email and password.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Login sukses'
+                  data:
+                    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                    name: Andra
+                    email: andra@yahoo.com
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Login sukses'
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                      name:
+                        type: string
+                        example: Andra
+                      email:
+                        type: string
+                        example: andra@yahoo.com
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Cek email dan password lagi'
+                  data: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Cek email dan password lagi'
+                  data:
+                    type: string
+                    example: null
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email address of the user.'
+                  example: andra@yahoo.com
+                password:
+                  type: string
+                  description: 'The password for the account.'
+                  example: rahasia123
+              required:
+                - email
+                - password
+      security: []
+  /api/dresscodes:
+    get:
+      summary: 'List all dresscodes'
+      operationId: listAllDresscodes
+      description: 'This endpoint retrieves a list of all dresscodes in the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Daftar Dresscode'
+                  data:
+                    -
+                      id: 1
+                      hari: Monday
+                      dresscode: Formal
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Daftar Dresscode'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        hari: Monday
+                        dresscode: Formal
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        hari:
+                          type: string
+                          example: Monday
+                        dresscode:
+                          type: string
+                          example: Formal
+      tags:
+        - 'Dresscode Management'
+      security: []
+    post:
+      summary: 'Add a new dresscode'
+      operationId: addANewDresscode
+      description: 'This endpoint allows adding a new dresscode to the system.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Dresscode berhasil dibuat'
+                  data:
+                    id: 1
+                    hari: Monday
+                    dresscode: Formal
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Dresscode berhasil dibuat'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      hari:
+                        type: string
+                        example: Monday
+                      dresscode:
+                        type: string
+                        example: Formal
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Ada kesalahan'
+                  data:
+                    hari:
+                      - 'The hari field is required.'
+                    dresscode:
+                      - 'The dresscode field is required.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Ada kesalahan'
+                  data:
+                    type: object
+                    properties:
+                      hari:
+                        type: array
+                        example:
+                          - 'The hari field is required.'
+                        items:
+                          type: string
+                      dresscode:
+                        type: array
+                        example:
+                          - 'The dresscode field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Dresscode Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hari:
+                  type: string
+                  description: 'The day for the dress code.'
+                  example: Monday
+                dresscode:
+                  type: string
+                  description: 'The dress code for the day.'
+                  example: Formal
+              required:
+                - hari
+                - dresscode
+      security: []
+  '/api/dresscodes/{id}':
+    get:
+      summary: 'Get details of a specific dresscode'
+      operationId: getDetailsOfASpecificDresscode
+      description: 'This endpoint retrieves details of a specific dresscode by its ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Detail Dresscode'
+                  data:
+                    id: 1
+                    hari: Monday
+                    dresscode: Formal
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Detail Dresscode'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      hari:
+                        type: string
+                        example: Monday
+                      dresscode:
+                        type: string
+                        example: Formal
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Dresscode tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Dresscode tidak ditemukan'
+      tags:
+        - 'Dresscode Management'
+      security: []
+    put:
+      summary: 'Update a specific dresscode'
+      operationId: updateASpecificDresscode
+      description: 'This endpoint allows updating details of a specific dresscode.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Dresscode berhasil diperbarui'
+                  data:
+                    id: 1
+                    hari: Monday
+                    dresscode: Casual
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Dresscode berhasil diperbarui'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      hari:
+                        type: string
+                        example: Monday
+                      dresscode:
+                        type: string
+                        example: Casual
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Dresscode tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Dresscode tidak ditemukan'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Ada kesalahan'
+                  data:
+                    hari:
+                      - 'The hari field is required.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Ada kesalahan'
+                  data:
+                    type: object
+                    properties:
+                      hari:
+                        type: array
+                        example:
+                          - 'The hari field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'Dresscode Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hari:
+                  type: string
+                  description: 'The day for the dress code.'
+                  example: Monday
+                dresscode:
+                  type: string
+                  description: 'The dress code for the day.'
+                  example: Formal
+      security: []
+    delete:
+      summary: 'Delete a specific dresscode'
+      operationId: deleteASpecificDresscode
+      description: 'This endpoint allows deleting a specific dresscode from the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Dresscode berhasil dihapus'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Dresscode berhasil dihapus'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Dresscode tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Dresscode tidak ditemukan'
+      tags:
+        - 'Dresscode Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the dresscode.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/docs:
+    get:
+      summary: ''
+      operationId: getApiDocs
+      description: ''
+      parameters: []
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  /api/users:
+    get:
+      summary: 'List all users'
+      operationId: listAllUsers
+      description: 'This endpoint retrieves a list of all users in the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Daftar Pengguna'
+                  data:
+                    -
+                      id: 1
+                      name: Andra
+                      email: andra@yahoo.com
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Daftar Pengguna'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: Andra
+                        email: andra@yahoo.com
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: Andra
+                        email:
+                          type: string
+                          example: andra@yahoo.com
+      tags:
+        - 'User Management'
+      security: []
+    post:
+      summary: 'Add a new user'
+      operationId: addANewUser
+      description: 'This endpoint allows an admin to add a new user to the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Sukses register'
+                  data:
+                    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                    name: Andra
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Sukses register'
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+                      name:
+                        type: string
+                        example: Andra
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Ada kesalahan'
+                  data:
+                    email:
+                      - 'The email has already been taken.'
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Ada kesalahan'
+                  data:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+      tags:
+        - 'User Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: Andra
+                email:
+                  type: string
+                  description: 'The email address of the user.'
+                  example: andra@yahoo.com
+                password:
+                  type: string
+                  description: 'The password for the account.'
+                  example: rahasia123
+                confirm_password:
+                  type: string
+                  description: 'Password confirmation, must match the password.'
+                  example: rahasia123
+              required:
+                - name
+                - email
+                - password
+                - confirm_password
+      security: []
+  '/api/users/{id}':
+    get:
+      summary: 'Get details of a specific user'
+      operationId: getDetailsOfASpecificUser
+      description: 'This endpoint retrieves details of a specific user by their ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Detail Pengguna'
+                  data:
+                    id: 1
+                    name: Andra
+                    email: andra@yahoo.com
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Detail Pengguna'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Andra
+                      email:
+                        type: string
+                        example: andra@yahoo.com
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Pengguna tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Pengguna tidak ditemukan'
+      tags:
+        - 'User Management'
+      security: []
+    put:
+      summary: 'Update a specific user'
+      operationId: updateASpecificUser
+      description: 'This endpoint allows an admin to update the details of a specific user.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Pengguna berhasil diperbarui'
+                  data:
+                    id: 1
+                    name: Andra
+                    email: andra@yahoo.com
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Pengguna berhasil diperbarui'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Andra
+                      email:
+                        type: string
+                        example: andra@yahoo.com
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Pengguna tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Pengguna tidak ditemukan'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Ada kesalahan'
+                  data:
+                    email:
+                      - 'The email has already been taken.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Ada kesalahan'
+                  data:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+      tags:
+        - 'User Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: Andra
+                email:
+                  type: string
+                  description: 'The email address of the user.'
+                  example: andra@yahoo.com
+                password:
+                  type: string
+                  description: 'The new password for the account (if updating).'
+                  example: rahasia123
+                confirm_password:
+                  type: string
+                  description: 'Password confirmation, must match the new password.'
+                  example: rahasia123
+      security: []
+    delete:
+      summary: 'Delete a specific user'
+      operationId: deleteASpecificUser
+      description: 'This endpoint allows an admin to delete a specific user from the system.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Pengguna berhasil dihapus'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Pengguna berhasil dihapus'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Pengguna tidak ditemukan'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Pengguna tidak ditemukan'
+      tags:
+        - 'User Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: 'Agenda Management'
+    description: ''
+  -
+    name: Authentication
+    description: ''
+  -
+    name: 'Dresscode Management'
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: 'User Management'
+    description: ''

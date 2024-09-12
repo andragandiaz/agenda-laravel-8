@@ -1,0 +1,358 @@
+name: 'Dresscode Management'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/dresscodes
+    metadata:
+      groupName: 'Dresscode Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all dresscodes'
+      description: 'This endpoint retrieves a list of all dresscodes in the system.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Daftar Dresscode",
+            "data": [
+              {
+                "id": 1,
+                "hari": "Monday",
+                "dresscode": "Formal"
+              }
+            ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/dresscodes
+    metadata:
+      groupName: 'Dresscode Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Add a new dresscode'
+      description: 'This endpoint allows adding a new dresscode to the system.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      hari:
+        name: hari
+        description: 'The day for the dress code.'
+        required: true
+        example: Monday
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      dresscode:
+        name: dresscode
+        description: 'The dress code for the day.'
+        required: true
+        example: Formal
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      hari: Monday
+      dresscode: Formal
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Dresscode berhasil dibuat",
+            "data": {
+              "id": 1,
+              "hari": "Monday",
+              "dresscode": "Formal"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Ada kesalahan",
+            "data": {
+              "hari": [
+                "The hari field is required."
+              ],
+              "dresscode": [
+                "The dresscode field is required."
+              ]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/dresscodes/{id}'
+    metadata:
+      groupName: 'Dresscode Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get details of a specific dresscode'
+      description: 'This endpoint retrieves details of a specific dresscode by its ID.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the dresscode.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Detail Dresscode",
+            "data": {
+              "id": 1,
+              "hari": "Monday",
+              "dresscode": "Formal"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Dresscode tidak ditemukan"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/dresscodes/{id}'
+    metadata:
+      groupName: 'Dresscode Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a specific dresscode'
+      description: 'This endpoint allows updating details of a specific dresscode.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the dresscode.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      hari:
+        name: hari
+        description: 'The day for the dress code.'
+        required: false
+        example: Monday
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      dresscode:
+        name: dresscode
+        description: 'The dress code for the day.'
+        required: false
+        example: Formal
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      hari: Monday
+      dresscode: Formal
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Dresscode berhasil diperbarui",
+            "data": {
+              "id": 1,
+              "hari": "Monday",
+              "dresscode": "Casual"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Dresscode tidak ditemukan"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Ada kesalahan",
+            "data": {
+              "hari": [
+                "The hari field is required."
+              ]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/dresscodes/{id}'
+    metadata:
+      groupName: 'Dresscode Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a specific dresscode'
+      description: 'This endpoint allows deleting a specific dresscode from the system.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the dresscode.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Dresscode berhasil dihapus"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Dresscode tidak ditemukan"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

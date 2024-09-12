@@ -1,0 +1,475 @@
+name: 'Agenda Management'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/agendas
+    metadata:
+      groupName: 'Agenda Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Add a new agenda'
+      description: 'This endpoint allows a user to add a new agenda item to the system.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      tanggal:
+        name: tanggal
+        description: 'The date of the agenda.'
+        required: true
+        example: '2024-08-27'
+        type: date
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      waktu:
+        name: waktu
+        description: 'The time of the agenda.'
+        required: true
+        example: '09:00'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      kegiatan:
+        name: kegiatan
+        description: 'The activity of the agenda.'
+        required: true
+        example: 'Meeting with client'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      tipe_acara:
+        name: tipe_acara
+        description: 'The type of event.'
+        required: true
+        example: Offline
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      tempat:
+        name: tempat
+        description: 'The location of the agenda.'
+        required: true
+        example: Jakarta
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      delegasi:
+        name: delegasi
+        description: 'The delegation for the agenda.'
+        required: true
+        example: Andra
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      drescode:
+        name: drescode
+        description: 'The dress code for the agenda.'
+        required: true
+        example: 'Business Casual'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      tanggal: '2024-08-27'
+      waktu: '09:00'
+      kegiatan: 'Meeting with client'
+      tipe_acara: Offline
+      tempat: Jakarta
+      delegasi: Andra
+      drescode: 'Business Casual'
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Agenda berhasil ditambahkan",
+            "data": {
+              "id": 1,
+              "tanggal": "2024-08-27",
+              "waktu": "09:00",
+              "kegiatan": "Meeting with client",
+              "tipe_acara": "Offline",
+              "tempat": "Jakarta",
+              "delegasi": "Andra",
+              "drescode": "Business Casual"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Ada kesalahan dalam validasi input",
+            "data": {
+              "tanggal": ["The tanggal field is required."],
+              "waktu": ["The waktu field is required."],
+              "kegiatan": ["The kegiatan field is required."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/agendas
+    metadata:
+      groupName: 'Agenda Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all agendas'
+      description: 'This endpoint retrieves a list of all agenda items in the system.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Daftar agenda berhasil diambil",
+            "data": [
+              {
+                "id": 1,
+                "tanggal": "2024-08-27",
+                "waktu": "09:00",
+                "kegiatan": "Meeting with client",
+                "tipe_acara": "Offline",
+                "tempat": "Jakarta",
+                "delegasi": "Andra",
+                "drescode": "Business Casual"
+              }
+            ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/agendas/{id}'
+    metadata:
+      groupName: 'Agenda Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get details of a specific agenda'
+      description: 'This endpoint retrieves details of a specific agenda item by its ID.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the agenda item.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Detail agenda berhasil diambil",
+            "data": {
+              "id": 1,
+              "tanggal": "2024-08-27",
+              "waktu": "09:00",
+              "kegiatan": "Meeting with client",
+              "tipe_acara": "Offline",
+              "tempat": "Jakarta",
+              "delegasi": "Andra",
+              "drescode": "Business Casual"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Agenda tidak ditemukan"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/agendas/{id}'
+    metadata:
+      groupName: 'Agenda Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a specific agenda'
+      description: 'This endpoint allows a user to update the details of a specific agenda item.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the agenda item.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      tanggal:
+        name: tanggal
+        description: 'The date of the agenda.'
+        required: true
+        example: '2024-08-27'
+        type: date
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      waktu:
+        name: waktu
+        description: 'The time of the agenda.'
+        required: true
+        example: '09:00'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      kegiatan:
+        name: kegiatan
+        description: 'The activity of the agenda.'
+        required: true
+        example: 'Meeting with client'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      tipe_acara:
+        name: tipe_acara
+        description: 'The type of event.'
+        required: true
+        example: Offline
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      tempat:
+        name: tempat
+        description: 'The location of the agenda.'
+        required: true
+        example: Jakarta
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      delegasi:
+        name: delegasi
+        description: 'The delegation for the agenda.'
+        required: true
+        example: Andra
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+      drescode:
+        name: drescode
+        description: 'The dress code for the agenda.'
+        required: true
+        example: 'Business Casual'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanBodyParameters:
+      tanggal: '2024-08-27'
+      waktu: '09:00'
+      kegiatan: 'Meeting with client'
+      tipe_acara: Offline
+      tempat: Jakarta
+      delegasi: Andra
+      drescode: 'Business Casual'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Agenda berhasil diperbarui",
+            "data": {
+              "id": 1,
+              "tanggal": "2024-08-27",
+              "waktu": "09:00",
+              "kegiatan": "Meeting with client",
+              "tipe_acara": "Offline",
+              "tempat": "Jakarta",
+              "delegasi": "Andra",
+              "drescode": "Business Casual"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Agenda tidak ditemukan"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Ada kesalahan dalam validasi input",
+            "data": {
+              "tanggal": ["The tanggal field is required."],
+              "waktu": ["The waktu field is required."],
+              "kegiatan": ["The kegiatan field is required."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/agendas/{id}'
+    metadata:
+      groupName: 'Agenda Management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a specific agenda'
+      description: 'This endpoint allows a user to delete a specific agenda item from the system.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the agenda item.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Agenda berhasil dihapus"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Agenda tidak ditemukan"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
