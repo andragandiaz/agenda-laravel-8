@@ -48,7 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('agendas', [AgendaController::class, 'add']); 
     Route::get('agendas', [AgendaController::class, 'list']); 
     Route::get('agendas/{id}', [AgendaController::class, 'detail']); 
-    Route::put('agendas/{id}', [AgendaController::class, 'edit']); 
+    Route::post('edit-agendas/{id}', [AgendaController::class, 'edit']); 
     Route::delete('agendas/{id}', [AgendaController::class, 'delete']); 
     Route::get('/agenda-by-date', [AgendaController::class, 'getAgendaByDateRange']);
     Route::get('agendas-today', [AgendaController::class, 'getAgendaForToday']);

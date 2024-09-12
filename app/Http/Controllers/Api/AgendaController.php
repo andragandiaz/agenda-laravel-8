@@ -273,6 +273,7 @@ class AgendaController extends Controller
      */
     public function edit(Request $request, $id)
     {
+        printf($request);
         $agenda = Agenda::find($id);
 
         if (!$agenda) {
@@ -300,7 +301,57 @@ class AgendaController extends Controller
             ], 422);
         }
 
-        $agenda->update($request->all());
+        
+        if ($request->filled ('tanggal')) $tanggal = $request->input('tanggal');
+        if ($request->filled ('waktu')) $waktu = $request->input('waktu');
+        if ($request->filled ('kegiatan')) $kegiatan = $request->input('kegiatan');
+        if ($request->filled ('tipe_acara')) $tipe_acara = $request->input('tipe_acara');
+        if ($request->filled ('tempat')) $tempat = $request->input('tempat');
+        if ($request->filled ('delegasi')) $delegasi = $request->input('delegasi');
+        if ($request->filled ('drescode')) $drescode = $request->input('drescode');
+ 
+
+    
+    $file = $request->file('file');
+    $original_file = null;
+    $file_name = null;
+    
+    if ($file !== null) {
+        $original_file = $file->getClientOriginalName();
+        $file_name = time().'.'.$file->getClientOriginalExtension();
+        $file->move(public_path('/upload'), $file_name);
+    }
+
+        $agenda = DB::transaction(function() use (
+            $tanggal,
+            $waktu,
+            $kegiatan,
+            $tipe_acara,
+            $tempat,
+            $delegasi,
+            $drescode,
+            $original_file,
+            $file_name,
+            $id)
+        {
+          $data = DB::table ('agendas')->where('id',$id)->update([
+            'tanggal' => $tanggal,
+            'waktu' => $waktu,
+            'kegiatan' => $kegiatan,
+            'tipe_acara' => $tipe_acara,
+            'tempat' => $tempat,
+            'delegasi' => $delegasi,
+            'drescode' => $drescode,
+            'original_file' => $original_file,
+            'file_name' => $file_name
+          ]);
+            
+
+
+
+
+        });
+        
 
         return response()->json([
             'success' => true,
